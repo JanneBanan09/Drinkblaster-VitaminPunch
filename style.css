@@ -1,0 +1,3 @@
+body{margin:0}
+.hero{height:100vh;background:url('hero.png') center/cover no-repeat}
+.overlay{color:white;padding:100px;font-family:Arial}
