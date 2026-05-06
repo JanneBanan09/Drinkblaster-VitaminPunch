@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drinkblaster | Vitamin Punch</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Montserrat, Arial, sans-serif;
+  background: #fff;
+  color: #070707;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.topbar {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 62px;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 1px 0 rgba(0,0,0,.08);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-weight: 900;
+  font-size: 30px;
+  font-style: italic;
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #050505;
+  color: #76b900;
+  display: grid;
+  place-items: center;
+  font-style: normal;
+}
+
+.nav {
+  display: flex;
+  gap: 42px;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.buy {
+  background: #75b900;
+  color: white;
+  padding: 14px 30px;
+  border-radius: 999px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.hero {
+  min-height: 735px;
+  display: grid;
+  grid-template-columns: 43% 57%;
+  overflow: hidden;
+  background: linear-gradient(90deg, #fffdf7 0%, #fff8e9 42%, #dcefb1 100%);
+}
+
+.hero-left {
+  padding: 68px 0 50px 75px;
+  z-index: 3;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 116px;
+  line-height: .88;
+  letter-spacing: -5px;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.hero h1 span {
+  display: block;
+  color: #050505;
+}
+
+.hero h1 strong {
+  display: block;
+  color: #e41535;
+}
+
+.hero h2 {
+  margin: 30px 0 18px;
+  text-transform: uppercase;
+  font-size: 35px;
+  line-height: 1.04;
+  font-weight: 900;
+}
+
+.hero p {
+  width: 430px;
+  max-width: 90%;
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+.hero-icons {
+  display: flex;
+  gap: 36px;
+  margin: 28px 0 28px;
+}
+
+.hero-icons div {
+  width: 95px;
+  text-align: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.circle {
+  width: 58px;
+  height: 58px;
+  border: 3px solid #75b900;
+  color: #75b900;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 9px;
+  font-size: 26px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: #75b900;
+  color: white;
+  padding: 17px 30px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  font-weight: 900;
+  box-shadow: 0 15px 24px rgba(95,150,0,.25);
+}
+
+.hero-right {
+  position: relative;
+  min-height: 735px;
+  background: url("hero-product.png") center center / cover no-repeat;
+}
+
+.badge {
+  position: absolute;
+  right: 7%;
+  top: 92px;
+  width: 135px;
+  height: 135px;
+  background: #030303;
+  color: white;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.08;
+  text-transform: uppercase;
+  font-weight: 900;
+  z-index: 10;
+  box-shadow: inset 0 -7px 0 #75b900;
+}
+
+.strip {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 45px 75px;
+  background: #050505;
+  color: white;
+}
+
+.strip h2 {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 34px;
+  line-height: 1.05;
+  font-weight: 900;
+}
+
+.strip h2 span {
+  color: #75b900;
+}
+
+.strip p {
+  line-height: 1.55;
+  font-weight: 600;
+  max-width: 450px;
+}
+
+.strip-feature {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.strip-feature span {
+  color: #75b900;
+  font-size: 52px;
+}
+
+.ingredients {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  background: #fffaf0;
+}
+
+.ginger-card, .flavour-card {
+  padding: 45px 70px;
+}
+
+.ginger-card {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 20px;
+  border-right: 1px solid #e1d7c8;
+}
+
+.ginger-card h2, .flavour-card h2, .target h2 {
+  margin: 0 0 18px;
+  text-transform: uppercase;
+  font-size: 38px;
+  line-height: 1.02;
+  font-weight: 900;
+}
+
+.ginger-card h2 span, .target h2 span {
+  color: #75b900;
+}
+
+.ginger-card p, .target p {
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.real-ginger {
+  width: 100%;
+  height: 190px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 30% 55%, #f4d093 0 14%, transparent 15%),
+    radial-gradient(circle at 52% 40%, #e2b36b 0 18%, transparent 19%),
+    radial-gradient(circle at 70% 55%, #d39a50 0 16%, transparent 17%),
+    linear-gradient(120deg, #f5deb3, #c98d3f);
+  filter: drop-shadow(0 15px 18px rgba(0,0,0,.16));
+}
+
+.flavour-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.ing {
+  width: 88px;
+  height: 88px;
+  display: block;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  box-shadow: 0 10px 18px rgba(0,0,0,.12);
+}
+
+.kiwi-small {
+  background: radial-gradient(circle,#fff 0 12%,#111 13% 15%,#96d53b 16% 44%,#377100 45% 48%,#8a5b21 49% 100%);
+}
+
+.lime-small {
+  background: radial-gradient(circle,#fbffd7 0 16%,#c5ff55 17% 35%,#55a300 36% 100%);
+}
+
+.lemon-small {
+  background: radial-gradient(circle,#fffbd0 0 20%,#ffd93f 21% 70%,#eca900 71% 100%);
+}
+
+.straw-small {
+  border-radius: 58% 58% 70% 70%;
+  background: linear-gradient(145deg,#ff4152,#b6001b);
+}
+
+.ginger-small {
+  border-radius: 50% 35% 45% 35%;
+  background: linear-gradient(90deg,#e8c27c,#c98d3f);
+}
+
+.flavour-grid b {
+  display: block;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.flavour-grid small {
+  display: block;
+  margin-top: 7px;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 0;
+  padding: 35px 70px;
+  background: linear-gradient(90deg,#e7f3b9,#d7eb9f);
+  text-align: center;
+}
+
+.benefits article {
+  border-right: 1px solid rgba(0,0,0,.18);
+  padding: 0 24px;
+}
+
+.benefits article:last-child {
+  border: 0;
+}
+
+.benefits h3 {
+  margin: 8px 0 6px;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.benefits p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.lifestyle {
+  display: grid;
+  grid-template-columns: 45% 55%;
+}
+
+.people {
+  min-height: 315px;
+  background:
+    radial-gradient(circle at 82% 20%, rgba(255,205,70,.8), transparent 16%),
+    linear-gradient(160deg,#2c4318,#9ebf64);
+  position: relative;
+  overflow: hidden;
+}
+
+.person {
+  position: absolute;
+  bottom: 0;
+  width: 120px;
+  height: 215px;
+  border-radius: 65px 65px 0 0;
+  background: linear-gradient(#222 0 35%, #3e5636 36%);
+}
+
+.person:before {
+  content: "";
+  position: absolute;
+  top: -34px;
+  left: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #d79b6c;
+}
+
+.p1 { left: 13%; transform: scale(.9); }
+.p2 { left: 39%; }
+.p3 { left: 64%; transform: scale(.9); }
+
+.target {
+  padding: 45px 70px;
+  background: #fffdf7;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 25px;
+  position: relative;
+}
+
+.minis {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+}
+
+.mini {
+  width: 78px;
+  height: 210px;
+  border-radius: 28px 28px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 900;
+  border: 3px solid rgba(0,0,0,.12);
+}
+
+.red { background: linear-gradient(#f53b42,#ffe9dc 50%,#f33339); }
+.yellow { background: linear-gradient(#ffd428,#fff4b0 50%,#ffbf00); }
+.green { background: linear-gradient(#83d61b,#edffd2 50%,#63aa00); }
+
+.dark-btn {
+  position: absolute;
+  right: 70px;
+  bottom: 28px;
+  background: #050505;
+  color: #75b900;
+  border-radius: 999px;
+  padding: 17px 35px;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.footer {
+  min-height: 230px;
+  background: #050505;
+  color: white;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1.2fr;
+  align-items: center;
+  gap: 40px;
+  padding: 38px 85px;
+}
+
+.footer h2 {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 42px;
+  line-height: 1.05;
+  font-weight: 900;
+}
+
+.footer h2 span {
+  color: #75b900;
+}
+
+.footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  font-weight: 900;
+  line-height: 2.2;
+}
+
+.footer li:before {
+  content: "✓";
+  color: #75b900;
+  margin-right: 12px;
+}
+
+.footer-logo {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 26px;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.footer-logo span {
+  display: block;
+  font-size: 60px;
+  color: #75b900;
+  font-style: normal;
+}
+
+@media (max-width: 950px) {
+  .topbar {
+    padding: 16px 22px;
+    height: auto;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-left {
+    padding: 45px 24px;
+  }
+
+  .hero h1 {
+    font-size: 72px;
+  }
+
+  .hero-right {
+    min-height: 560px;
+  }
+
+  .strip, .ingredients, .lifestyle, .footer, .target {
+    grid-template-columns: 1fr;
+  }
+
+  .benefits, .flavour-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 54px;
+  }
+
+  .hero-icons {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+  }
+
+  .benefits, .flavour-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ginger-card {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="#" class="logo"><span class="logo-icon">⚡</span>DRINKBLASTER</a>
+  <nav class="nav">
+    <a href="#">Hem</a>
+    <a href="#produkter">Produkter</a>
+    <a href="#om">Om oss</a>
+    <a href="#ingredienser">Ingredienser</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+  <a href="#kontakt" class="buy">Köp nu</a>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-left">
+      <h1><span>Vitamin</span><strong>Punch</strong></h1>
+      <h2>Smaken av hälsa<br>kraften av en knytnäve</h2>
+      <p>En fruktig hälsodryck med kiwi, lime, citron, jordgubbar och ingefära. Utan tillsatt socker, utan kolsyra och med kreatin.</p>
+
+      <div class="hero-icons">
+        <div><span class="circle">▧</span>Inget tillsatt<br>socker</div>
+        <div><span class="circle">○</span>Ingen<br>kolsyra</div>
+        <div><span class="circle">⚡</span>Med<br>kreatin</div>
+      </div>
+
+      <a href="#ingredienser" class="cta">Upptäck smaken →</a>
+    </div>
+
+    <div class="hero-right">
+      <div class="badge">Frisk<br>naturlig<br>power</div>
+    </div>
+  </section>
+
+  <section class="strip" id="om">
+    <div>
+      <h2><span>Drinkblaster</span><br>Nästa generation drycker</h2>
+      <p>Vi på Drinkblaster skapar moderna drycker för en aktiv och hälsomedveten livsstil. Vårt fokus är smak, funktion och rena ingredienser.</p>
+    </div>
+    <div class="strip-feature"><span>♧</span><b>Naturliga<br>ingredienser</b></div>
+    <div class="strip-feature"><span>♡</span><b>För en aktiv<br>livsstil</b></div>
+    <div class="strip-feature"><span>◎</span><b>Ett smartare<br>val</b></div>
+  </section>
+
+  <section class="ingredients" id="ingredienser">
+    <article class="ginger-card">
+      <div>
+        <h2>Kraften i<br><span>ingefära</span></h2>
+        <p>Ingefära ger Vitamin Punch en unik karaktär med en frisk och lätt kryddig smak. En ingrediens som länge varit uppskattad i aktiva och hälsomedvetna livsstilar.</p>
+      </div>
+      <div class="real-ginger"></div>
+    </article>
+
+    <article class="flavour-card">
+      <h2>Smakexplosion</h2>
+      <div class="flavour-grid">
+        <div><span class="ing kiwi-small"></span><b>Kiwi</b><small>Mjuk & tropisk</small></div>
+        <div><span class="ing lime-small"></span><b>Lime</b><small>Fräsch & syrlig</small></div>
+        <div><span class="ing lemon-small"></span><b>Citron</b><small>Uppiggande & frisk</small></div>
+        <div><span class="ing straw-small"></span><b>Jordgubbar</b><small>Naturlig sötma</small></div>
+        <div><span class="ing ginger-small"></span><b>Ingefära</b><small>Frisk & kryddig</small></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="benefits">
+    <article><div>▧</div><h3>Inget tillsatt socker</h3><p>Ett smartare val för din hälsa</p></article>
+    <article><div>○</div><h3>Ingen kolsyra</h3><p>Lätt, fräsch och mild</p></article>
+    <article><div>▰</div><h3>Med kreatin</h3><p>För en aktiv vardag</p></article>
+    <article><div>◇</div><h3>Med ingefära</h3><p>Frisk och kryddig karaktär</p></article>
+  </section>
+
+  <section class="lifestyle" id="produkter">
+    <div class="people">
+      <div class="person p1"></div>
+      <div class="person p2"></div>
+      <div class="person p3"></div>
+    </div>
+
+    <div class="target">
+      <div>
+        <h2>För alla<br><span>hälsomedvetna</span></h2>
+        <p>Vitamin Punch är för dig som vill ha ett gott, uppfriskande och funktionellt alternativ i vardagen. Oavsett ålder, oavsett mål.</p>
+      </div>
+      <div class="minis">
+        <div class="mini red">Vitamin<br>Punch</div>
+        <div class="mini yellow">Citrus<br>Blast</div>
+        <div class="mini green">Lemon<br>Lime</div>
+      </div>
+      <a class="dark-btn" href="#">Se fler produkter →</a>
+    </div>
+  </section>
+
+  <section class="footer" id="kontakt">
+    <div>
+      <h2>Redo att uppleva<br><span>smaken av hälsa?</span></h2>
+      <p>Drink it. Punch it.</p>
+      <a class="cta" href="#">Köp Vitamin Punch →</a>
+    </div>
+
+    <div class="footer-logo"><span>⚡</span>Drinkblaster</div>
+
+    <ul>
+      <li>Utan tillsatt socker</li>
+      <li>Ingen kolsyra</li>
+      <li>Med kreatin</li>
+      <li>Med ingefära</li>
+    </ul>
+  </section>
+</main>
+
+</body>
+</html>
