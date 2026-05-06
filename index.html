@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DRINKBLASTER – Vitamin Punch</title>
+  <meta name="description" content="Vitamin Punch – hälsosamt alternativ till energidryck. Jordgubbar, citron, lime, grönt äpple, kiwi och ingefära. Ingen kolsyra. Inget tillsatt socker. Med kreatin." />
+
+  <style>
+    :root{
+      /* Etikett/inspo-färger */
+      --ink: #0b0f0c;
+      --paper: #ffffff;
+      --punch: #ff2f3a;  /* PUNCH röd */
+      --lime: #78ff3a;   /* limegrön */
+      --acid: #d9ff2b;   /* gulgrön highlight */
+      --sun: #ffb300;    /* gul/orange accent */
+      --muted: #5f6a5f;
+
+      --shadow: 0 28px 90px rgba(0,0,0,.18);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+
+      --max: 1180px;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:#121612;
+      background:#fff;
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ width:min(var(--max), calc(100% - 48px)); margin-inline:auto; }
+
+    /* NAV */
+    .nav{
+      position: sticky;
+      top:0;
+      z-index: 100;
+      background: rgba(255,255,255,.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .nav .wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 0;
+      gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 1100;
+      letter-spacing:.2px;
+    }
+    .mark{
+      width:30px;height:30px;border-radius:10px;
+      background: radial-gradient(circle at 30% 25%, var(--acid), var(--lime));
+      box-shadow: 0 14px 40px rgba(120,255,58,.25);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+    }
+    .mark svg{ width:18px;height:18px; }
+    .brand small{
+      display:block;
+      font-size: 11px;
+      opacity: .7;
+      font-weight: 950;
+      letter-spacing:.18em;
+    }
+
+    .menu{
+      display:flex;
+      gap:18px;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing:.02em;
+    }
+    .menu a{ opacity:.82; }
+    .menu a:hover{ opacity:1; }
+
+    .btn{
+      border:0;
+      cursor:pointer;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 1100;
+      letter-spacing:.2px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      white-space: nowrap;
+    }
+    .btn:active{ transform: scale(.98); }
+    .btn-primary{
+      color:#061006;
+      background: linear-gradient(135deg, var(--acid), var(--lime));
+      box-shadow: 0 16px 36px rgba(120,255,58,.25);
+    }
+    .btn-ghost{
+      background: rgba(0,0,0,.06);
+      color:#101310;
+    }
+
+    /* HERO – lik inspirationsbilden */
+    header.hero{
+      position: relative;
+      padding: 58px 0 22px;
+      background:
+        radial-gradient(1100px 620px at 74% 25%, rgba(120,255,58,.22), transparent 60%),
+        radial-gradient(900px 520px at 22% 28%, rgba(255,47,58,.14), transparent 64%),
+        linear-gradient(180deg, #f5ffe9 0%, #ffffff 58%, #ffffff 100%);
+      overflow: hidden;
+    }
+
+    /* Subtil textur från image.png (valfri fil) */
+    header.hero::before{
+      content:"";
+      position:absolute;
+      inset:-25%;
+      background: url("image.png") center/cover no-repeat;
+      opacity:.10;
+      filter: blur(18px) saturate(1.08);
+      transform: rotate(-2deg) scale(1.02);
+      mix-blend-mode: multiply;
+      pointer-events:none;
+    }
+
+    /* Mist/splash i botten av hero */
+    header.hero::after{
+      content:"";
+      position:absolute;
+      inset:auto -10% -30% -10%;
+      height: 480px;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(255,255,255,.88), transparent 58%),
+        radial-gradient(circle at 35% 38%, rgba(255,255,255,.78), transparent 60%),
+        radial-gradient(circle at 55% 30%, rgba(255,255,255,.68), transparent 60%),
+        radial-gradient(circle at 72% 42%, rgba(255,255,255,.70), transparent 60%),
+        radial-gradient(circle at 85% 30%, rgba(255,255,255,.58), transparent 62%),
+        radial-gradient(circle at 52% 70%, rgba(120,255,58,.16), transparent 65%),
+        radial-gradient(circle at 78% 70%, rgba(255,47,58,.10), transparent 68%);
+      transform: rotate(-2deg);
+      pointer-events:none;
+    }
+
+    .hero-grid{
+      position: relative;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items:center;
+      gap: 34px;
+      min-height: 580px;
+    }
+
+    /* Left – typografi */
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background: rgba(255,255,255,.80);
+      border: 1px solid rgba(0,0,0,.06);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 1100;
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      width: fit-content;
+      box-shadow: 0 12px 28px rgba(0,0,0,.06);
+    }
+    .kdot{
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--sun), var(--punch));
+      box-shadow: 0 12px 24px rgba(255,47,58,.20);
+    }
+
+    .hero h1{
+      margin: 10px 0 0;
+      font-size: clamp(46px, 5.2vw, 88px);
+      line-height: .90;
+      letter-spacing: -0.04em;
+      font-weight: 1200;
+      text-transform: uppercase;
+    }
+    .hero h1 .vitamin{
+      display:block;
+      color: #0e120e;
+      text-shadow: 0 18px 40px rgba(0,0,0,.08);
+    }
+    .hero h1 .punch{
+      display:block;
+      color: var(--punch);
+      text-shadow: 0 22px 60px rgba(255,47,58,.22);
+    }
+
+    .sub{
+      margin: 10px 0 0;
+      max-width: 62ch;
+      color: #2b342b;
+      font-weight: 680;
+      font-size: 16px;
+    }
+
+    .usp-row{
+      display:flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .usp{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 16px 40px rgba(0,0,0,.06);
+      font-weight: 1100;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .usp svg{ width:18px; height:18px; }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top: 18px;
+    }
+
+    /* Right – stage med splash + frilagda “frukter” runt flaskan */
+    .stage{
+      position: relative;
+      height: 580px;
+      display:grid;
+      place-items:center;
+      isolation: isolate;
+    }
+
+    .splash{
+      position:absolute;
+      left: 50%;
+      top: 46%;
+      transform: translate(-45%, -50%) rotate(10deg);
+      width: 600px;
+      height: 600px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.97), rgba(255,255,255,.56) 42%, transparent 72%),
+        radial-gradient(circle at 62% 40%, rgba(255,255,255,.80), transparent 64%),
+        radial-gradient(circle at 44% 72%, rgba(120,255,58,.24), transparent 62%),
+        radial-gradient(circle at 78% 68%, rgba(255,47,58,.18), transparent 64%),
+        radial-gradient(circle at 55% 55%, rgba(255,255,255,.34), transparent 70%);
+      opacity: .98;
+      z-index: 1;
+    }
+
+    /* Extra “spray arms” för mer kraft */
+    .spray{
+      position:absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events:none;
+      opacity: .95;
+      filter: drop-shadow(0 18px 28px rgba(0,0,0,.08));
+    }
+
+    /* Droppar som rör sig */
+    .droplet{
+      position:absolute;
+      width: 12px; height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 18px 40px rgba(0,0,0,.12);
+      opacity: .85;
+      z-index: 3;
+      animation: float 3.8s ease-in-out infinite;
+    }
+    .d1{ top: 92px; left: 56px; animation-delay:.1s; }
+    .d2{ top: 142px; right: 72px; animation-delay:.6s; transform: scale(.95); }
+    .d3{ bottom: 132px; left: 120px; animation-delay:.9s; transform: scale(1.1); }
+    .d4{ bottom: 160px; right: 116px; animation-delay:1.2s; transform: scale(1.25); }
+
+    @keyframes float{
+      0%,100%{ transform: translateY(0) scale(1); }
+      50%{ transform: translateY(-14px) scale(1.05); }
+    }
+
+    /* Flaskan */
+    .bottle{
+      position: relative;
+      width: min(390px, 82%);
+      height: auto;
+      max-height: 580px;
+      object-fit: contain;
+      filter: drop-shadow(0 34px 78px rgba(0,0,0,.28));
+      transform: translateY(12px);
+      z-index: 6;
+    }
+
+    /* Frukt – frilagda SVG:er */
+    .fruit{
+      position:absolute;
+      z-index: 5;
+      width: 132px;
+      height: 132px;
+      filter: drop-shadow(0 26px 60px rgba(0,0,0,.22));
+      transform: rotate(var(--rot, 0deg));
+      opacity: .98;
+      pointer-events:none;
+    }
+
+    /* Positioner (lik inspirationsbildens layout) */
+    .strawberry{ left: 38px; bottom: 92px; --rot:-10deg; width: 140px; height: 140px; }
+    .lemon{ left: 105px; top: 170px; --rot: 10deg; }
+    .lime{ left: 190px; top: 310px; --rot:-8deg; }
+    .apple{ right: 150px; bottom: 118px; --rot: 10deg; width: 138px; height: 138px; }
+    .kiwi{ right: 62px; top: 190px; --rot:-10deg; }
+    .ginger{ right: 172px; top: 340px; --rot: 14deg; width: 160px; height: 160px; }
+
+    /* POWERBAR (svart band under hero, som inspo) */
+    .powerbar{
+      background: linear-gradient(180deg, #0b0f0c, #070a07);
+      color: rgba(255,255,255,.92);
+      padding: 18px 0;
+    }
+    .powerbar .wrap{
+      display:grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 18px;
+      align-items:center;
+    }
+    .power-title{
+      font-weight: 1150;
+      letter-spacing: -.01em;
+    }
+    .power-title strong{ color: var(--acid); }
+
+    .pills{
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+    .pill{
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 1050;
+      font-size: 12px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      white-space: nowrap;
+    }
+
+    /* Sektioner */
+    section{ padding: 70px 0; }
+    .title{
+      text-align:center;
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 1200;
+      letter-spacing:-.02em;
+      margin:0 0 10px;
+    }
+    .lead{
+      text-align:center;
+      color: var(--muted);
+      font-weight: 720;
+      max-width: 72ch;
+      margin: 0 auto 30px;
+    }
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .card{
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius-xl);
+      padding: 18px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.06);
+    }
+    .card h3{ margin: 8px 0 6px; font-weight:1200; }
+    .card p{ margin:0; color:#394239; font-weight:680; }
+
+    .ingredients{
+      display:flex;
+      gap:10px;
+      flex-wrap: wrap;
+      justify-content:center;
+      margin-top: 16px;
+    }
+    .chip{
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.05);
+      border: 1px solid rgba(0,0,0,.06);
+      font-weight: 950;
+      color:#222;
+    }
+
+    .cta{
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(1000px 520px at 30% 35%, rgba(120,255,58,.18), transparent 60%),
+        radial-gradient(900px 520px at 78% 40%, rgba(255,47,58,.12), transparent 62%),
+        rgba(255,255,255,.9);
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+      align-items:center;
+      overflow:hidden;
+      position:relative;
+    }
+    .cta h2{ margin:0 0 8px; font-weight:1200; letter-spacing:-.02em; }
+    .cta p{ margin:0; color: var(--muted); font-weight: 720; }
+    .cta .actions{ margin-top: 14px; display:flex; gap:12px; flex-wrap:wrap; }
+    .cta-badge{
+      justify-self:end;
+      width: 160px; height: 160px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(217,255,43,.60), rgba(120,255,58,.22) 45%, transparent 72%);
+      filter: drop-shadow(0 24px 60px rgba(0,0,0,.10));
+    }
+
+    footer{
+      margin-top: 20px;
+      background:#070a07;
+      color: rgba(255,255,255,.72);
+      padding: 26px 0;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    /* Popup/modal */
+    .modal-backdrop{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.50);
+      display:none;
+      z-index: 999;
+      align-items:center;
+      justify-content:center;
+      padding: 22px;
+    }
+    .modal{
+      width: min(560px, 100%);
+      background: rgba(255,255,255,.95);
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 40px 140px rgba(0,0,0,.35);
+      padding: 18px;
+      position:relative;
+    }
+    .modal h3{
+      margin: 6px 0 8px;
+      font-size: 20px;
+      font-weight: 1200;
+      letter-spacing:-.01em;
+    }
+    .modal p{
+      margin:0 0 14px;
+      color: #3a433a;
+      font-weight: 700;
+    }
+    .modal .row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .close{
+      position:absolute;
+      top: 10px;
+      right: 10px;
+      width: 40px; height: 40px;
+      border-radius: 999px;
+      border: 0;
+      cursor:pointer;
+      background: rgba(0,0,0,.06);
+      font-weight: 1100;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .menu{ display:none; }
+      .hero-grid{ grid-template-columns: 1fr; }
+      .stage{ height: 520px; }
+      .splash{ width: 520px; height: 520px; }
+      .powerbar .wrap{ grid-template-columns: 1fr; }
+      .pills{ justify-content:flex-start; }
+      .cards{ grid-template-columns: 1fr; }
+      .cta{ grid-template-columns: 1fr; }
+      .cta-badge{ justify-self:start; }
+      .ginger{ display:none; } /* lite mindre plottrigt på mobil */
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <div class="nav">
+    <div class="wrap">
+      <a class="brand" href="#hem" aria-label="Till toppen">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M13 2L3 14h7l-1 8 12-14h-7l-1-6Z" fill="#0b0f0c"/>
+          </svg>
+        </span>
+        <div>
+          DRINKBLASTER
+          <small>VITAMIN PUNCH</small>
+        </div>
+      </a>
+
+      <nav class="menu" aria-label="Meny">
+        <a href="#hem">HEM</a>
+        <a href="#produkt">PRODUKTEN</a>
+        <a href="#ingredienser">INGREDIENSER</a>
+        <a href="#kop">KÖP</a>
+      </nav>
+
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a class="btn btn-ghost" href="#ingredienser">Upptäck smaken</a>
+        <button class="btn btn-primary js-buy">Köp nu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero" id="hem">
+    <div class="wrap hero-grid">
+      <!-- LEFT -->
+      <div>
+        <div class="kicker"><span class="kdot"></span> FRISK • NATURLIG • POWER</div>
+
+        <h1>
+          <span class="vitamin">VITAMIN</span>
+          <span class="punch">PUNCH</span>
+        </h1>
+
+        <p class="sub">
+          Smaken av hälsa – kraften av ett smartare val.
+          Jordgubbar, citron, lime, grönt äpple, kiwi och ingefära.
+          Ingen kolsyra (snäll mot tänderna), inget tillsatt socker – och med kreatin för aktiv livsstil.
+        </p>
+
+        <div class="usp-row" aria-label="Fördelar">
+          <div class="usp">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 10V7a5 5 0 0 1 10 0v3" stroke="#1b231b" stroke-width="2" stroke-linecap="round"/>
+              <path d="M6 10h12v10H6V10Z" fill="rgba(217,255,43,.45)" stroke="rgba(0,0,0,.10)"/>
+            </svg>
+            INGET TILLSATT SOCKER
+          </div>
+
+          <div class="usp">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2c3.5 4.5 7 7.5 7 12a7 7 0 1 1-14 0c0-4.5 3.5-7.5 7-12Z" fill="rgba(255,255,255,.95)" stroke="rgba(0,0,0,.10)"/>
+              <path d="M9.5 15.5c.7 1.6 2 2.5 3.8 2.5" stroke="#1b231b" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            INGEN KOLSYRA
+          </div>
+
+          <div class="usp">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 20v-7m10 7v-7" stroke="#1b231b" stroke-width="2" stroke-linecap="round"/>
+              <path d="M6 13h12l-1-7H7l-1 7Z" fill="rgba(120,255,58,.26)" stroke="rgba(0,0,0,.10)"/>
+            </svg>
+            MED KREATIN
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary js-buy">Köp Vitamin Punch</button>
+          <a class="btn btn-ghost" href="#produkt">Läs mer</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: STAGE -->
+      <div class="stage" aria-label="Produkt i fokus">
+        <div class="splash" aria-hidden="true"></div>
+
+        <!-- Splash arms (mer kraft) -->
+        <svg class="spray" viewBox="0 0 900 700" aria-hidden="true">
+          <path d="M190 390c80-140 160-200 250-210 110-12 220 60 300 210"
+                fill="none" stroke="rgba(255,255,255,.68)" stroke-width="22" stroke-linecap="round"/>
+          <path d="M240 450c110-90 220-120 340-98 95 17 170 60 240 140"
+                fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16" stroke-linecap="round"/>
+          <path d="M210 320c60-110 140-170 235-185 120-18 250 55 340 190"
+                fill="none" stroke="rgba(255,255,255,.42)" stroke-width="12" stroke-linecap="round"/>
+
+          <!-- droplets -->
+          <circle cx="250" cy="240" r="7" fill="rgba(255,255,255,.75)"/>
+          <circle cx="720" cy="260" r="9" fill="rgba(255,255,255,.70)"/>
+          <circle cx="680" cy="520" r="6" fill="rgba(255,255,255,.68)"/>
+          <circle cx="300" cy="540" r="8" fill="rgba(255,255,255,.70)"/>
+          <circle cx="520" cy="170" r="6" fill="rgba(255,255,255,.66)"/>
+        </svg>
+
+        <!-- Floating droplets -->
+        <div class="droplet d1" aria-hidden="true"></div>
+        <div class="droplet d2" aria-hidden="true"></div>
+        <div class="droplet d3" aria-hidden="true"></div>
+        <div class="droplet d4" aria-hidden="true"></div>
+
+        <!-- FRILAGDA “FOTOREAL”-STYLE FRUKTER (SVG med gradients/seeds) -->
+        <!-- Strawberry -->
+        <svg class="fruit strawberry" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <radialGradient id="stBody" cx="35%" cy="25%" r="80%">
+              <stop offset="0%" stop-color="#ffadb3"/>
+              <stop offset="35%" stop-color="#ff4d59"/>
+              <stop offset="85%" stop-color="#b30f1a"/>
+            </radialGradient>
+            <radialGradient id="stShine" cx="28%" cy="18%" r="60%">
+              <stop offset="0%" stop-color="rgba(255,255,255,.95)"/>
+              <stop offset="45%" stop-color="rgba(255,255,255,.20)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </radialGradient>
+            <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="0.6"/>
+            </filter>
+          </defs>
+          <path d="M105 22c-14 8-26 19-35 33-17 26-22 55-19 79 5 36 34 64 71 64 41 0 73-34 73-75 0-36-21-77-56-101-11-8-22-8-34 0z"
+                fill="url(#stBody)"/>
+          <!-- seeds -->
+          <g fill="#ffd77a" opacity=".85" filter="url(#soft)">
+            <ellipse cx="78" cy="92" rx="4" ry="6"/><ellipse cx="106" cy="80" rx="4" ry="6"/>
+            <ellipse cx="128" cy="98" rx="4" ry="6"/><ellipse cx="92" cy="115" rx="4" ry="6"/>
+            <ellipse cx="118" cy="124" rx="4" ry="6"/><ellipse cx="70" cy="120" rx="4" ry="6"/>
+            <ellipse cx="140" cy="120" rx="4" ry="6"/><ellipse cx="98" cy="140" rx="4" ry="6"/>
+            <ellipse cx="124" cy="150" rx="4" ry="6"/><ellipse cx="82" cy="150" rx="4" ry="6"/>
+          </g>
+          <circle cx="72" cy="62" r="26" fill="rgba(30,150,70,.20)"/>
+          <path d="M72 60c18 0 34 10 44 24" stroke="rgba(30,150,70,.55)" stroke-width="10" stroke-linecap="round"/>
+          <circle cx="70" cy="58" r="46" fill="url(#stShine)"/>
+        </svg>
+
+        <!-- Lemon slice -->
+        <svg class="fruit lemon" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <radialGradient id="leRind" cx="35%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#fff6bf"/>
+              <stop offset="55%" stop-color="#ffd84a"/>
+              <stop offset="100%" stop-color="#ffb300"/>
+            </radialGradient>
+            <radialGradient id="leFlesh" cx="45%" cy="40%" r="70%">
+              <stop offset="0%" stop-color="#fffde9"/>
+              <stop offset="55%" stop-color="#fff1a8"/>
+              <stop offset="100%" stop-color="#ffd44a"/>
+            </radialGradient>
+            <filter id="leShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="0.5"/>
+            </filter>
+          </defs>
+          <circle cx="100" cy="100" r="88" fill="url(#leRind)"/>
+          <circle cx="100" cy="100" r="72" fill="url(#leFlesh)"/>
+          <!-- segments -->
+          <g stroke="rgba(255,255,255,.65)" stroke-width="5" filter="url(#leShadow)">
+            <path d="M100 28V172"/><path d="M28 100H172"/>
+            <path d="M48 48L152 152"/><path d="M152 48L48 152"/>
+          </g>
+          <circle cx="100" cy="100" r="18" fill="rgba(255,255,255,.75)"/>
+          <circle cx="75" cy="70" r="36" fill="rgba(255,255,255,.22)"/>
+        </svg>
+
+        <!-- Lime slice -->
+        <svg class="fruit lime" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <radialGradient id="liRind" cx="35%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#eaffcf"/>
+              <stop offset="55%" stop-color="#8cff4a"/>
+              <stop offset="100%" stop-color="#34c52a"/>
+            </radialGradient>
+            <radialGradient id="liFlesh" cx="45%" cy="40%" r="70%">
+              <stop offset="0%" stop-color="#f7ffe9"/>
+              <stop offset="55%" stop-color="#d9ffb9"/>
+              <stop offset="100%" stop-color="#7bff43"/>
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="100" r="88" fill="url(#liRind)"/>
+          <circle cx="100" cy="100" r="72" fill="url(#liFlesh)"/>
+          <g stroke="rgba(255,255,255,.62)" stroke-width="5">
+            <path d="M100 28V172"/><path d="M28 100H172"/>
+            <path d="M48 48L152 152"/><path d="M152 48L48 152"/>
+          </g>
+          <circle cx="100" cy="100" r="18" fill="rgba(255,255,255,.70)"/>
+          <circle cx="78" cy="72" r="36" fill="rgba(255,255,255,.18)"/>
+        </svg>
+
+        <!-- Green apple wedge -->
+        <svg class="fruit apple" viewBox="0 0 220 220" aria-hidden="true">
+          <defs>
+            <radialGradient id="apFlesh" cx="35%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="55%" stop-color="#f4ffe7"/>
+              <stop offset="100%" stop-color="#d7f5c0"/>
+            </radialGradient>
+            <linearGradient id="apSkin" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#a7ff67"/>
+              <stop offset="55%" stop-color="#45d23b"/>
+              <stop offset="100%" stop-color="#19962a"/>
+            </linearGradient>
+          </defs>
+          <!-- wedge -->
+          <path d="M50 150c18-62 52-96 100-104 10-2 20-2 30 0 8 2 14 6 18 12 9 14 4 40-12 64-22 34-64 66-106 82-16 6-26 0-30-10-4-10-4-26 0-44z"
+                fill="url(#apFlesh)" stroke="rgba(0,0,0,.06)" stroke-width="2"/>
+          <!-- skin edge -->
+          <path d="M55 145c21-58 54-88 95-96 10-2 18-2 26 0 8 2 13 6 16 11 6 11 4 28-6 48-2 4-4 8-6 12-22 34-64 66-106 82-11 4-18 2-23-5"
+                fill="none" stroke="url(#apSkin)" stroke-width="12" stroke-linecap="round"/>
+          <!-- shine -->
+          <ellipse cx="118" cy="92" rx="42" ry="28" fill="rgba(255,255,255,.25)"/>
+          <!-- seed -->
+          <path d="M128 118c8-8 16-8 24 0-6 10-14 18-24 24-10-6-18-14-24-24 8-8 16-8 24 0z"
+                fill="rgba(120,90,50,.35)"/>
+        </svg>
+
+        <!-- Kiwi slice -->
+        <svg class="fruit kiwi" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <radialGradient id="kiRind" cx="35%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#d7c09a"/>
+              <stop offset="65%" stop-color="#8a6a45"/>
+              <stop offset="100%" stop-color="#5a4027"/>
+            </radialGradient>
+            <radialGradient id="kiFlesh" cx="45%" cy="40%" r="70%">
+              <stop offset="0%" stop-color="#f7ffe9"/>
+              <stop offset="45%" stop-color="#d9ffb9"/>
+              <stop offset="100%" stop-color="#62d54a"/>
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="100" r="88" fill="url(#kiRind)"/>
+          <circle cx="100" cy="100" r="72" fill="url(#kiFlesh)"/>
+          <circle cx="100" cy="100" r="22" fill="rgba(255,255,255,.75)"/>
+          <!-- seeds ring -->
+          <g fill="#1b1b1b" opacity=".78">
+            <ellipse cx="100" cy="45" rx="3" ry="6"/>
+            <ellipse cx="132" cy="54" rx="3" ry="6"/>
+            <ellipse cx="152" cy="80" rx="3" ry="6"/>
+            <ellipse cx="155" cy="112" rx="3" ry="6"/>
+            <ellipse cx="140" cy="140" rx="3" ry="6"/>
+            <ellipse cx="112" cy="155" rx="3" ry="6"/>
+            <ellipse cx="80" cy="152" rx="3" ry="6"/>
+            <ellipse cx="52" cy="132" rx="3" ry="6"/>
+            <ellipse cx="45" cy="100" rx="3" ry="6"/>
+            <ellipse cx="54" cy="68" rx="3" ry="6"/>
+          </g>
+          <circle cx="76" cy="72" r="36" fill="rgba(255,255,255,.18)"/>
+        </svg>
+
+        <!-- Ginger root (stylad) -->
+        <svg class="fruit ginger" viewBox="0 0 220 220" aria-hidden="true">
+          <defs>
+            <radialGradient id="giBody" cx="35%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#fff1d7"/>
+              <stop offset="55%" stop-color="#e9c28a"/>
+              <stop offset="100%" stop-color="#b97a32"/>
+            </radialGradient>
+            <filter id="giGrain" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="noise"/>
+              <feColorMatrix type="matrix"
+                values="1 0 0 0 0
+                        0 1 0 0 0
+                        0 0 1 0 0
+                        0 0 0 .18 0" />
+              <feComposite operator="in" in2="SourceGraphic"/>
+            </filter>
+          </defs>
+          <path d="M64 120c-18-20-10-48 14-62 18-10 38-7 52 6 6-14 20-24 36-22 22 3 36 24 28 46 16 8 26 24 22 42-6 26-34 36-56 26-8 18-28 30-48 26-18-4-30-18-30-36-14 6-30 2-40-10-10-12-10-30 2-42 6-6 12-8 20-10z"
+                fill="url(#giBody)" stroke="rgba(0,0,0,.08)" stroke-width="2"/>
+          <!-- texture -->
+          <g filter="url(#giGrain)"><rect x="0" y="0" width="220" height="220" fill="#fff"/></g>
+          <!-- highlights -->
+          <path d="M88 92c18-14 42-12 54 6" stroke="rgba(255,255,255,.45)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M110 140c20-10 42-6 52 10" stroke="rgba(255,255,255,.35)" stroke-width="10" stroke-linecap="round"/>
+        </svg>
+
+        <!-- DIN FLASKA -->
+        <img class="bottle" src="bottle.png" alt="Drinkblaster Vitamin Punch flaska" />
+      </div>
+    </div>
+  </header>
+
+  <!-- POWERBAR -->
+  <div class="powerbar" id="produkt">
+    <div class="wrap">
+      <div class="power-title">
+        DRINKBLASTER – <strong>NÄSTA GENERATION DRYCK</strong><br/>
+        Energidryck-känsla, renare innehåll.
+      </div>
+      <div class="pills" aria-label="Snabbfakta">
+        <div class="pill">🍓 Naturlig smak</div>
+        <div class="pill">💧 0% kolsyra</div>
+        <div class="pill">💪 Med kreatin</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENEFITS -->
+  <section>
+    <div class="wrap">
+      <h2 class="title">Ett smartare alternativ</h2>
+      <p class="lead">Skapad för dig som vill ha kraft – utan onödiga tillsatser.</p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Inget tillsatt socker</h3>
+          <p>Fruktig smakprofil utan extra socker.</p>
+        </div>
+        <div class="card">
+          <h3>Ingen kolsyra</h3>
+          <p>Skonsammare för tänderna och lätt att dricka när som helst.</p>
+        </div>
+        <div class="card">
+          <h3>Med kreatin</h3>
+          <p>För aktiv livsstil och träning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INGREDIENTS -->
+  <section id="ingredienser" style="background: linear-gradient(180deg,#f8fff3 0%,#ffffff 100%);">
+    <div class="wrap">
+      <h2 class="title">Ingredienser</h2>
+      <p class="lead">Jordgubbar • citron • lime • grönt äpple • kiwi • ingefära</p>
+
+      <div class="ingredients" aria-label="Ingredienser">
+        <div class="chip">🍓 Jordgubbar</div>
+        <div class="chip">🍋 Citron</div>
+        <div class="chip">🍈 Lime</div>
+        <div class="chip">🍏 Grönt äpple</div>
+        <div class="chip">🥝 Kiwi</div>
+        <div class="chip">🌱 Ingefära</div>
+        <div class="chip">💪 Kreatin</div>
+        <div class="chip">💧 Ingen kolsyra</div>
+        <div class="chip">🚫 Inget tillsatt socker</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="kop">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <h2>Redo att uppleva smaken av hälsa?</h2>
+          <p>Drick rent. Drick fruktigt. Drick Vitamin Punch – ett mer hälsomedvetet alternativ med kraftkänsla.</p>
+          <div class="actions">
+            <button class="btn btn-primary js-buy">Köp nu</button>
+            <a class="btn btn-ghost" href="#hem">Till toppen</a>
+          </div>
+        </div>
+        <div class="cta-badge" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+      <div>© 2026 DRINKBLASTER – Vitamin Punch</div>
+      <div style="opacity:.75;">Demo-landningssida. Kan byggas ut till riktig webshop (Shopify/Stripe).</div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-backdrop" id="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+      <button class="close" id="closeBtn" aria-label="Stäng">✕</button>
+      <h3 id="mTitle">Köp Vitamin Punch</h3>
+      <p>Detta är en demo. Här kan du koppla på en riktig kassa (t.ex. Shopify/Stripe) eller bygga en enkel checkout-sida.</p>
+      <div class="row">
+        <button class="btn btn-primary" id="demoCheckout">Fortsätt (demo)</button>
+        <button class="btn btn-ghost" id="closeBtn2">Stäng</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", e => {
+        const target = document.querySelector(a.getAttribute("href"));
+        if(!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior:"smooth", block:"start" });
+      });
+    });
+
+    // Modal köp
+    const modal = document.getElementById("modal");
+    const openers = document.querySelectorAll(".js-buy");
+    const close1 = document.getElementById("closeBtn");
+    const close2 = document.getElementById("closeBtn2");
+    const demo = document.getElementById("demoCheckout");
+
+    function openModal(){ modal.style.display = "flex"; }
+    function closeModal(){ modal.style.display = "none"; }
+
+    openers.forEach(b => b.addEventListener("click", openModal));
+    close1.addEventListener("click", closeModal);
+    close2.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => { if(e.target === modal) closeModal(); });
+    demo.addEventListener("click", () => {
+      alert("Demo: Här kopplar vi på riktig betalning (Stripe/Shopify).");
+      closeModal();
+    });
+  </script>
+
+</body>
+</html>
+``
