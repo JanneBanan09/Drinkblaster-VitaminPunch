@@ -1,0 +1,26 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+main {
+  width: 100%;
+}
+
+.website-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+@media (min-width: 1400px) {
+  body {
+    background: #f4f4f4;
+  }
+
+  .website-image {
+    max-width: 1400px;
+  }
+}
