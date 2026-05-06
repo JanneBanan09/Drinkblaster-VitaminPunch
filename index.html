@@ -4,381 +4,73 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Drinkblaster | Vitamin Punch</title>
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap');
-
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#111;
+  font-family:Arial,sans-serif;
+}
+.page{
+  position:relative;
+  width:100%;
+  max-width:980px;
+  margin:0 auto;
+  background:#fff;
+}
+.page img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.hotspot{
+  position:absolute;
+  display:block;
+  z-index:5;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* Meny */
+.hot-hem{left:33%;top:1.5%;width:5%;height:2%}
+.hot-produkter{left:40%;top:1.5%;width:9%;height:2%}
+.hot-om{left:51%;top:1.5%;width:7%;height:2%}
+.hot-ing{left:61%;top:1.5%;width:11%;height:2%}
+.hot-kontakt{left:76%;top:1.5%;width:8%;height:2%}
 
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: Montserrat, Arial, sans-serif;
-  background: #ffffff;
-  color: #070707;
-}
+/* Knappar */
+.hot-buy-top{right:4%;top:1%;width:11%;height:3.5%;border-radius:999px}
+.hot-discover{left:6%;top:36%;width:23%;height:4.5%;border-radius:999px}
+.hot-products{right:9%;top:84.5%;width:22%;height:4.5%;border-radius:999px}
+.hot-buy-bottom{left:6%;bottom:4%;width:24%;height:4.5%;border-radius:999px}
 
-body {
-  display: flex;
-  justify-content: center;
-}
-
-.page {
-  width: 100%;
-  max-width: 1400px;
-  background: #fff;
-  overflow: hidden;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.topbar {
-  height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 62px;
-  background: #fff;
-  box-shadow: 0 1px 0 rgba(0,0,0,.08);
-  position: sticky;
-  top: 0;
-  z-index: 50;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  font-weight: 900;
-  font-size: 30px;
-  font-style: italic;
-}
-
-.logo-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: #050505;
-  color: #76b900;
-  display: grid;
-  place-items: center;
-  font-style: normal;
-}
-
-.nav {
-  display: flex;
-  gap: 42px;
-  font-size: 13px;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.nav a:hover {
-  color: #75b900;
-}
-
-.buy {
-  background: #75b900;
-  color: white;
-  padding: 14px 30px;
-  border-radius: 999px;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.hero {
-  min-height: 735px;
-  display: grid;
-  grid-template-columns: 43% 57%;
-  overflow: hidden;
-  background: linear-gradient(90deg, #fffdf7 0%, #fff8e9 42%, #dcefb1 100%);
-}
-
-.hero-left {
-  padding: 68px 0 50px 75px;
-  z-index: 3;
-}
-
-.hero h1 {
-  margin: 0;
-  font-size: 116px;
-  line-height: .88;
-  letter-spacing: -5px;
-  text-transform: uppercase;
-  font-weight: 900;
-  font-style: italic;
-}
-
-.hero h1 span {
-  display: block;
-  color: #050505;
-}
-
-.hero h1 strong {
-  display: block;
-  color: #e41535;
-}
-
-.hero h2 {
-  margin: 30px 0 18px;
-  text-transform: uppercase;
-  font-size: 35px;
-  line-height: 1.04;
-  font-weight: 900;
-}
-
-.hero p {
-  width: 430px;
-  max-width: 90%;
-  font-size: 16px;
-  line-height: 1.55;
-  font-weight: 700;
-}
-
-.hero-icons {
-  display: flex;
-  gap: 36px;
-  margin: 28px 0 28px;
-}
-
-.hero-icons div {
-  width: 95px;
-  text-align: center;
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight: 900;
-}
-
-.circle {
-  width: 58px;
-  height: 58px;
-  border: 3px solid #75b900;
-  color: #75b900;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  margin: 0 auto 9px;
-  font-size: 26px;
-}
-
-.cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  background: #75b900;
-  color: white;
-  padding: 17px 30px;
-  border-radius: 999px;
-  text-transform: uppercase;
-  font-weight: 900;
-  box-shadow: 0 15px 24px rgba(95,150,0,.25);
-}
-
-.cta:hover,
-.buy:hover {
-  filter: brightness(.92);
-}
-
-.hero-right {
-  position: relative;
-  min-height: 735px;
-  background: url("hero-product.png") center center / cover no-repeat;
-}
-
-.badge {
-  position: absolute;
-  right: 7%;
-  top: 92px;
-  width: 135px;
-  height: 135px;
-  background: #030303;
-  color: white;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  font-size: 20px;
-  line-height: 1.08;
-  text-transform: uppercase;
-  font-weight: 900;
-  z-index: 10;
-  box-shadow: inset 0 -7px 0 #75b900;
-}
-
-.real-section {
-  width: 100%;
-  display: block;
-}
-
-.image-section {
-  position: relative;
-}
-
-.image-link {
-  position: absolute;
-  display: block;
-  z-index: 20;
-}
-
-/* Klickbar yta över “Se fler produkter”-knappen i bilden */
-.products-link {
-  right: 8%;
-  bottom: 11%;
-  width: 260px;
-  height: 58px;
-  border-radius: 999px;
-}
-
-/* Klickbar yta över “Köp Vitamin Punch”-knappen i footer-bilden */
-.footer-buy-link {
-  left: 5%;
-  bottom: 9%;
-  width: 240px;
-  height: 58px;
-  border-radius: 999px;
-}
-
-.contact-panel {
-  background: #050505;
-  color: white;
-  padding: 70px;
-  text-align: center;
-}
-
-.contact-panel h2 {
-  margin: 0 0 15px;
-  font-size: 42px;
-  text-transform: uppercase;
-}
-
-.contact-panel span {
-  color: #75b900;
-}
-
-.contact-panel p {
-  max-width: 650px;
-  margin: 0 auto 30px;
-  line-height: 1.6;
-}
-
-@media (max-width: 950px) {
-  .topbar {
-    padding: 16px 22px;
-    height: auto;
-  }
-
-  .nav {
-    display: none;
-  }
-
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-left {
-    padding: 45px 24px;
-  }
-
-  .hero h1 {
-    font-size: 72px;
-  }
-
-  .hero-right {
-    min-height: 560px;
-  }
-}
-
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 54px;
-  }
-
-  .hero-icons {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 10px;
-  }
-
-  .contact-panel {
-    padding: 45px 22px;
-  }
+#kontakt{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:1px;
 }
 </style>
 </head>
-
 <body>
 <div class="page">
+  <img src="drinkblaster-page.png" alt="Drinkblaster Vitamin Punch hemsida">
 
-<header class="topbar">
-  <a href="#hem" class="logo"><span class="logo-icon">⚡</span>DRINKBLASTER</a>
+  <a class="hotspot hot-hem" href="#" aria-label="Hem"></a>
+  <a class="hotspot hot-produkter" href="#produkter" aria-label="Produkter"></a>
+  <a class="hotspot hot-om" href="#omoss" aria-label="Om oss"></a>
+  <a class="hotspot hot-ing" href="#ingredienser" aria-label="Ingredienser"></a>
+  <a class="hotspot hot-kontakt" href="#kontakt" aria-label="Kontakt"></a>
 
-  <nav class="nav">
-    <a href="#hem">Hem</a>
-    <a href="#produkter">Produkter</a>
-    <a href="#om">Om oss</a>
-    <a href="#ingredienser">Ingredienser</a>
-    <a href="#kontakt">Kontakt</a>
-  </nav>
+  <a class="hotspot hot-buy-top" href="#kontakt" aria-label="Köp nu"></a>
+  <a class="hotspot hot-discover" href="#ingredienser" aria-label="Upptäck smaken"></a>
+  <a class="hotspot hot-products" href="#produkter" aria-label="Se fler produkter"></a>
+  <a class="hotspot hot-buy-bottom" href="#kontakt" aria-label="Köp Vitamin Punch"></a>
 
-  <a href="#kontakt" class="buy">Köp nu</a>
-</header>
-
-<main>
-
-  <section class="hero" id="hem">
-    <div class="hero-left">
-      <h1>Vitamin <strong>Punch</strong></h1>
-      <h2>Smaken av hälsa<br>kraften av en knytnäve</h2>
-      <p>En fruktig hälsodryck med kiwi, lime, citron, jordgubbar, grönt äpple och ingefära. Utan tillsatt socker, utan kolsyra och med kreatin.</p>
-
-      <div class="hero-icons">
-        <div><span class="circle">▧</span>Inget tillsatt<br>socker</div>
-        <div><span class="circle">○</span>Ingen<br>kolsyra</div>
-        <div><span class="circle">⚡</span>Med<br>kreatin</div>
-      </div>
-
-      <a href="#ingredienser" class="cta">Upptäck smaken →</a>
-    </div>
-
-    <div class="hero-right">
-      <div class="badge">Frisk<br>naturlig<br>power</div>
-    </div>
-  </section>
-
-  <section id="om">
-    <img class="real-section" src="benefits-real.png" alt="Drinkblaster – nästa generation drycker">
-  </section>
-
-  <section id="ingredienser">
-    <img class="real-section" src="ingredients-real.png" alt="Kraften i ingefära och smakexplosion med riktiga frukter">
-  </section>
-
-  <section class="image-section" id="produkter">
-    <img class="real-section" src="lifestyle-real.png" alt="Hälsomedvetna personer och produktflaskor">
-    <a class="image-link products-link" href="#kontakt" aria-label="Se fler produkter"></a>
-  </section>
-
-  <section class="image-section">
-    <img class="real-section" src="footer-real.png" alt="Drinkblaster footer">
-    <a class="image-link footer-buy-link" href="#kontakt" aria-label="Köp Vitamin Punch"></a>
-  </section>
-
-  <section class="contact-panel" id="kontakt">
-    <h2>Köp <span>Vitamin Punch</span></h2>
-    <p>Vill du veta mer om Drinkblaster eller presentera produkten? Kontakta oss eller använd denna sida som er digitala produktpresentation.</p>
-    <a class="cta" href="mailto:info@drinkblaster.se">Kontakta Drinkblaster →</a>
-  </section>
-
-</main>
+  <span id="omoss"></span>
+  <span id="ingredienser"></span>
+  <span id="produkter"></span>
+  <span id="kontakt"></span>
 </div>
 </body>
 </html>
